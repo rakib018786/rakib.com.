@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="bn" class="scroll-smooth">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SPIDER — Next-Gen Flagship Store</title>
+  <title>SPIDER — Flagship Store Platform</title>
   
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Three.js for 3D Interactive Canvas -->
+  <!-- Three.js for Advanced 3D Flowing Wave Animation -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -35,33 +35,30 @@
       overflow-x: hidden;
     }
     
-    /* Background Premium Mesh Grid */
     .bg-mesh {
-      background-image: radial-gradient(rgba(0, 255, 163, 0.06) 1px, transparent 0);
+      background-image: radial-gradient(rgba(0, 255, 163, 0.05) 1px, transparent 0);
       background-size: 32px 32px;
     }
 
-    /* Glassmorphism Navigation & Cards */
     .glass-box {
-      background: rgba(11, 15, 25, 0.75);
-      backdrop-filter: blur(16px);
+      background: rgba(11, 15, 25, 0.85);
+      backdrop-filter: blur(20px);
       border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .glass-nav {
       background: rgba(5, 5, 10, 0.85);
-      backdrop-filter: blur(20px);
+      backdrop-filter: blur(25px);
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
 
-    /* Smooth Hover & Glow Effects */
     .spider-card {
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .spider-card:hover {
-      transform: translateY(-8px);
-      border-color: rgba(0, 255, 163, 0.5);
-      box-shadow: 0 12px 30px -10px rgba(0, 255, 163, 0.2);
+      transform: translateY(-6px);
+      border-color: rgba(0, 255, 163, 0.4);
+      box-shadow: 0 15px 35px -10px rgba(0, 255, 163, 0.2);
     }
 
     .spider-btn {
@@ -77,15 +74,16 @@
     #canvas-container {
       width: 100%;
       height: 400px;
+      position: relative;
     }
   </style>
 </head>
 <body class="antialiased bg-mesh selection:bg-spiderAccent selection:text-black">
 
-  <!-- 1. Header Navigation Bar -->
+  <!-- Header Navigation -->
   <header class="fixed top-0 left-0 w-full z-50 glass-nav px-6 lg:px-12 py-4 flex justify-between items-center">
     <div class="flex items-center gap-3">
-      <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-spiderGreen to-spiderAccent flex items-center justify-center text-black font-black">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-spiderGreen to-spiderAccent flex items-center justify-center text-black font-black shadow-lg shadow-spiderAccent/20">
         <i class="fa-solid fa-spider text-xl"></i>
       </div>
       <span class="text-2xl font-black tracking-widest text-white uppercase">SPIDER</span>
@@ -99,38 +97,64 @@
     </div>
   </header>
 
-  <!-- 2. Hero Showcase with Interactive 3D Canvas -->
+  <!-- Hero Showcase with Video-Inspired 3D Flowing Wave & Floating Apparel Cards -->
   <section class="pt-36 pb-20 px-6 max-w-7xl mx-auto">
     <div class="flex flex-col lg:flex-row items-center justify-between gap-12">
       
       <div class="lg:w-1/2 space-y-6 text-center lg:text-left">
         <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-spiderAccent text-xs font-bold uppercase tracking-wider">
-          <span class="w-2 h-2 rounded-full bg-spiderAccent animate-pulse"></span> Flagship Apparel Store
+          <span class="w-2 h-2 rounded-full bg-spiderAccent animate-pulse"></span> Flagship Streetwear Collection
         </div>
         
-        <h1 class="text-5xl lg:text-7xl font-black tracking-tight leading-none text-white">
-          THE FUTURE OF <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-spiderAccent to-spiderGreen">STREETWEAR</span>
+        <h1 class="text-4xl lg:text-6xl font-black tracking-tight leading-tight text-white">
+          YOUR STORE'S COMMAND <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-spiderAccent to-spiderGreen">CENTER FOR STYLE.</span>
         </h1>
         
-        <p class="text-gray-400 text-lg font-normal max-w-lg mx-auto lg:mx-0">
-          উচ্চমানের হুডি, কাস্টম জিন্স এবং ক্যাজুয়াল পোশাকের প্রিমিয়াম কালেকশন। সরাসরি সাইজ সিলেক্ট করে সহজেই অর্ডার কনফার্ম করুন।
+        <p class="text-gray-400 text-base font-normal max-w-lg mx-auto lg:mx-0">
+          Discover premium shirts, stylish t-shirts, custom hoodies & waist-fitted pants. Order instantly via our secure merchant system.
         </p>
 
         <div class="pt-2 flex justify-center lg:justify-start">
-          <a href="#storefront" class="spider-btn text-white px-8 py-4 rounded-full font-bold text-base shadow-2xl flex items-center gap-3">
-            <span>কলেকশন দেখুন</span>
+          <a href="#storefront" class="spider-btn text-white px-8 py-3.5 rounded-full font-bold text-base shadow-2xl flex items-center gap-3">
+            <span>Explore Collection</span>
             <i class="fa-solid fa-arrow-down-long"></i>
           </a>
         </div>
       </div>
 
-      <!-- Interactive 3D Box Container -->
-      <div class="lg:w-1/2 w-full">
-        <div class="glass-box rounded-3xl p-2 relative overflow-hidden shadow-2xl border border-white/10">
+      <!-- Advanced 3D Wave Canvas & Floating Apparel Cards Container -->
+      <div class="lg:w-1/2 w-full relative">
+        <div class="glass-box rounded-3xl p-3 relative overflow-hidden shadow-2xl border border-white/10">
           <div id="canvas-container" class="rounded-2xl overflow-hidden flex items-center justify-center"></div>
-          <div class="absolute bottom-4 left-6 text-xs text-gray-400 flex items-center gap-2">
-            <i class="fa-solid fa-cube text-spiderAccent"></i>
-            <span>Interactive 3D Apparel Box (Auto Rotating)</span>
+          
+          <!-- Floating Apparel Cards (Shirt, T-Shirt, Pants Preview) -->
+          <div class="absolute top-8 right-6 glass-box px-3.5 py-2.5 rounded-2xl border border-spiderAccent/30 shadow-xl animate-bounce hidden sm:flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-cover bg-center border border-white/10" style="background-image: url('https://images.unsplash.com/photo-1603252109303-2751441dd157?w=100')"></div>
+            <div>
+              <p class="text-[11px] font-bold text-white">Classic Shirt</p>
+              <p class="text-[10px] text-spiderAccent font-mono">৳1,200</p>
+            </div>
+          </div>
+
+          <div class="absolute top-36 left-4 glass-box px-3.5 py-2.5 rounded-2xl border border-white/10 shadow-xl hidden sm:flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-cover bg-center border border-white/10" style="background-image: url('https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=100')"></div>
+            <div>
+              <p class="text-[11px] font-bold text-white">Graphic T-Shirt</p>
+              <p class="text-[10px] text-spiderAccent font-mono">৳850</p>
+            </div>
+          </div>
+
+          <div class="absolute bottom-12 left-6 glass-box px-3.5 py-2.5 rounded-2xl border border-white/10 shadow-xl hidden sm:flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-cover bg-center border border-white/10" style="background-image: url('https://images.unsplash.com/photo-1542272604-787c3835535d?w=100')"></div>
+            <div>
+              <p class="text-[11px] font-bold text-white">Denim Pants</p>
+              <p class="text-[10px] text-spiderAccent font-mono">৳1,800</p>
+            </div>
+          </div>
+
+          <div class="absolute bottom-4 left-1/2 -translate-x-1/2 text-xs text-gray-400 flex items-center gap-2 bg-black/60 px-3 py-1 rounded-full backdrop-blur-md border border-white/10">
+            <i class="fa-solid fa-cube text-spiderAccent animate-spin"></i>
+            <span>Interactive 3D Wave Space</span>
           </div>
         </div>
       </div>
@@ -138,43 +162,65 @@
     </div>
   </section>
 
-  <!-- 3. Storefront Product Grid -->
-  <section id="storefront" class="py-16 px-6 max-w-7xl mx-auto">
-    <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-4">
+  <!-- Responsive Product Grid (2 Columns on Mobile) -->
+  <section id="storefront" class="py-16 px-4 md:px-8 max-w-7xl mx-auto">
+    <div class="flex justify-between items-end mb-8 px-2">
       <div>
         <span class="text-spiderAccent text-xs font-bold uppercase tracking-widest">Inventory Catalog</span>
-        <h2 class="text-3xl md:text-4xl font-black text-white mt-1">দোকানের সাম্প্রতিক কালেকশন</h2>
-      </div>
-      <div class="text-gray-400 text-sm">
-        কাস্টম অ্যাডমিন প্যানেল থেকে যেকোনো সময় নতুন পণ্য যোগ করা সম্ভব
+        <h2 class="text-2xl md:text-4xl font-black text-white mt-1">Featured Store Products</h2>
       </div>
     </div>
 
-    <!-- Dynamic Product Cards -->
-    <div id="product-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <!-- 2 Columns Grid on Mobile, 3-4 on Desktop -->
+    <div id="product-list" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
       
-      <!-- Default Sample Product Card -->
-      <div class="glass-box rounded-3xl p-5 flex flex-col justify-between spider-card relative group">
+      <!-- Sample Item 1 (Shirt) -->
+      <div class="glass-box rounded-2xl p-4 flex flex-col justify-between spider-card relative group">
         <div>
-          <div class="h-64 rounded-2xl bg-black/50 mb-5 overflow-hidden relative border border-white/5">
-            <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=800" class="object-cover h-full w-full group-hover:scale-105 transition duration-500" alt="Hoodie">
-            <span class="absolute top-3 right-3 bg-spiderAccent text-black text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider">In Stock</span>
+          <div class="h-44 md:h-56 rounded-xl bg-black/50 mb-3 overflow-hidden relative border border-white/5">
+            <img src="https://images.unsplash.com/photo-1603252109303-2751441dd157?w=800" class="object-cover h-full w-full group-hover:scale-105 transition duration-500" alt="Shirt">
+            <span class="absolute top-2.5 right-2.5 bg-spiderAccent text-black text-[10px] font-black px-2.5 py-0.5 rounded-full uppercase">In Stock</span>
           </div>
 
-          <h3 class="font-bold text-2xl text-white tracking-wide">Spider Cyber Heavy Hoodie</h3>
+          <h3 class="font-bold text-sm md:text-base text-white tracking-wide truncate">Spider Formal Cotton Shirt</h3>
           
-          <div class="flex flex-wrap gap-2 my-4">
-            <span class="bg-white/5 border border-white/10 text-gray-300 text-xs px-3 py-1 rounded-full">Sizes: S, M, L, XL</span>
-            <span class="bg-white/5 border border-white/10 text-gray-300 text-xs px-3 py-1 rounded-full">Color: Black Matte</span>
+          <div class="flex flex-wrap gap-1.5 my-2.5">
+            <span class="bg-white/5 border border-white/10 text-gray-300 text-[10px] px-2 py-0.5 rounded">Sizes: S - XXL</span>
+            <span class="bg-white/5 border border-white/10 text-gray-300 text-[10px] px-2 py-0.5 rounded">Navy Blue</span>
           </div>
         </div>
 
-        <div class="flex justify-between items-center mt-4 pt-4 border-t border-white/10">
-          <div>
-            <span class="text-xs text-gray-400 block">Price</span>
-            <span class="text-spiderAccent text-2xl font-black">৳১,৫০০</span>
+        <div class="flex flex-col gap-2 mt-3 pt-3 border-t border-white/10">
+          <div class="flex justify-between items-center">
+            <span class="text-spiderAccent text-base md:text-lg font-black">৳1,200</span>
           </div>
-          <button onclick="openOrderModal('Spider Cyber Heavy Hoodie', '৳১,৫০০')" class="spider-btn text-white px-6 py-2.5 rounded-xl text-sm font-bold shadow-lg">
+          <button onclick="openOrderModal('Spider Formal Cotton Shirt', '৳1,200')" class="spider-btn text-white w-full py-2 rounded-xl text-xs font-bold shadow-md">
+            Order Now
+          </button>
+        </div>
+      </div>
+
+      <!-- Sample Item 2 (T-Shirt) -->
+      <div class="glass-box rounded-2xl p-4 flex flex-col justify-between spider-card relative group">
+        <div>
+          <div class="h-44 md:h-56 rounded-xl bg-black/50 mb-3 overflow-hidden relative border border-white/5">
+            <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=800" class="object-cover h-full w-full group-hover:scale-105 transition duration-500" alt="T-Shirt">
+            <span class="absolute top-2.5 right-2.5 bg-spiderAccent text-black text-[10px] font-black px-2.5 py-0.5 rounded-full uppercase">In Stock</span>
+          </div>
+
+          <h3 class="font-bold text-sm md:text-base text-white tracking-wide truncate">Spider Cyber Graphic T-Shirt</h3>
+          
+          <div class="flex flex-wrap gap-1.5 my-2.5">
+            <span class="bg-white/5 border border-white/10 text-gray-300 text-[10px] px-2 py-0.5 rounded">Sizes: S - XL</span>
+            <span class="bg-white/5 border border-white/10 text-gray-300 text-[10px] px-2 py-0.5 rounded">Matte Black</span>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-2 mt-3 pt-3 border-t border-white/10">
+          <div class="flex justify-between items-center">
+            <span class="text-spiderAccent text-base md:text-lg font-black">৳850</span>
+          </div>
+          <button onclick="openOrderModal('Spider Cyber Graphic T-Shirt', '৳850')" class="spider-btn text-white w-full py-2 rounded-xl text-xs font-bold shadow-md">
             Order Now
           </button>
         </div>
@@ -183,41 +229,81 @@
     </div>
   </section>
 
-  <!-- 4. Customer Order Confirmation Modal -->
+  <!-- Customer Order Confirmation Modal -->
   <div id="orderModal" class="fixed inset-0 bg-black/80 backdrop-blur-xl hidden z-50 flex items-center justify-center p-4">
-    <div class="glass-box p-8 rounded-3xl w-full max-w-lg relative shadow-2xl border border-white/10">
-      <button onclick="closeModal('orderModal')" class="absolute top-5 right-5 text-gray-400 text-2xl hover:text-white transition">&times;</button>
+    <div class="glass-box p-6 md:p-8 rounded-3xl w-full max-w-md relative shadow-2xl border border-white/10">
+      <button onclick="closeModal('orderModal')" class="absolute top-5 right-5 text-gray-400 text-2xl hover:text-white">&times;</button>
       
-      <div class="flex items-center gap-3 mb-2">
-        <i class="fa-solid fa-bag-shopping text-spiderAccent text-2xl"></i>
-        <h3 class="text-2xl font-black text-white">অর্ডার বুকিং</h3>
-      </div>
-      <p id="orderProdName" class="text-sm font-medium text-spiderAccent mb-6 bg-white/5 p-3 rounded-xl border border-white/10"></p>
+      <h3 class="text-2xl font-black text-white mb-1"><i class="fa-solid fa-bag-shopping text-spiderAccent mr-2"></i>Place Order</h3>
+      <p id="orderProdName" class="text-xs font-medium text-spiderAccent mb-5 bg-white/5 p-3 rounded-xl border border-white/10"></p>
 
-      <form onsubmit="submitCustomerOrder(event)" class="space-y-4">
+      <form onsubmit="submitCustomerOrder(event)" class="space-y-3.5">
         <div>
-          <label class="block text-xs font-bold text-gray-300 mb-1 uppercase tracking-wider">আপনার নাম</label>
-          <input id="custName" type="text" placeholder="যেমন: মোঃ রাকিব" required class="w-full bg-black/50 border border-white/10 rounded-xl p-3 text-white focus:border-spiderAccent focus:outline-none text-sm">
+          <label class="block text-xs font-bold text-gray-300 mb-1 uppercase">Full Name</label>
+          <input id="custName" type="text" placeholder="e.g. Md Rakib" required class="w-full bg-black/50 border border-white/10 rounded-xl p-3 text-white focus:border-spiderAccent focus:outline-none text-sm">
         </div>
 
         <div>
-          <label class="block text-xs font-bold text-gray-300 mb-1 uppercase tracking-wider">মোবাইল নম্বর</label>
+          <label class="block text-xs font-bold text-gray-300 mb-1 uppercase">Phone Number</label>
           <input id="custPhone" type="tel" placeholder="018XXXXXXXX" required class="w-full bg-black/50 border border-white/10 rounded-xl p-3 text-white focus:border-spiderAccent focus:outline-none text-sm">
         </div>
 
         <div>
-          <label class="block text-xs font-bold text-gray-300 mb-1 uppercase tracking-wider">সাইজ (Size / Waist Spec)</label>
-          <input id="custSize" type="text" placeholder="যেমন: L অথবা Waist 32" required class="w-full bg-black/50 border border-white/10 rounded-xl p-3 text-white focus:border-spiderAccent focus:outline-none text-sm">
+          <label class="block text-xs font-bold text-gray-300 mb-1 uppercase">Size / Waist Spec</label>
+          <input id="custSize" type="text" placeholder="e.g. L or Waist 32" required class="w-full bg-black/50 border border-white/10 rounded-xl p-3 text-white focus:border-spiderAccent focus:outline-none text-sm">
         </div>
 
         <div>
-          <label class="block text-xs font-bold text-gray-300 mb-1 uppercase tracking-wider">পূর্ণাঙ্গ ডেলিভারি ঠিকানা</label>
-          <textarea id="custAddress" placeholder="বাসা/রোড নম্বর, এলাকা, থানা, জেলা" required class="w-full bg-black/50 border border-white/10 rounded-xl p-3 text-white focus:border-spiderAccent focus:outline-none text-sm h-20"></textarea>
+          <label class="block text-xs font-bold text-gray-300 mb-1 uppercase">Delivery Address</label>
+          <textarea id="custAddress" placeholder="House, Road, Area, City" required class="w-full bg-black/50 border border-white/10 rounded-xl p-3 text-white focus:border-spiderAccent focus:outline-none text-sm h-20"></textarea>
         </div>
 
-        <button type="submit" class="spider-btn w-full py-3.5 rounded-xl font-bold text-white shadow-xl text-base mt-2">
-          অর্ডার কনফার্ম করুন
+        <button type="submit" class="spider-btn w-full py-3.5 rounded-xl font-bold text-white shadow-xl text-sm mt-2">
+          Confirm Order
         </button>
       </form>
     </div>
   </div>
+
+  <!-- Admin Login Modal (Secure: Blank Password Field) -->
+  <div id="loginModal" class="fixed inset-0 bg-black/85 backdrop-blur-xl hidden z-50 flex items-center justify-center p-4">
+    <div class="glass-box p-6 md:p-8 rounded-3xl w-full max-w-md relative shadow-2xl border border-white/10">
+      <button onclick="closeModal('loginModal')" class="absolute top-5 right-5 text-gray-400 text-2xl hover:text-white">&times;</button>
+      
+      <h3 class="text-2xl font-black text-white mb-2"><i class="fa-solid fa-lock text-spiderAccent mr-2"></i>Merchant Login</h3>
+      <p class="text-xs text-gray-400 mb-6 bg-white/5 p-3 rounded-xl border border-white/10">
+        Enter administrator password to access control panel.
+      </p>
+      
+      <form onsubmit="handleAdminLogin(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-gray-300 mb-1 uppercase">Password</label>
+          <input id="adminPass" type="password" placeholder="" autocomplete="off" required class="w-full bg-black/50 border border-white/10 rounded-xl p-3 text-white focus:border-spiderAccent focus:outline-none text-sm">
+        </div>
+        <button type="submit" class="spider-btn w-full py-3.5 rounded-xl font-bold text-white shadow-xl text-sm">
+          Access Dashboard
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Admin Dashboard -->
+  <div id="adminDashboard" class="fixed inset-0 bg-black/95 backdrop-blur-2xl hidden z-50 overflow-y-auto p-4 md:p-8">
+    <div class="max-w-6xl mx-auto glass-box p-6 md:p-8 rounded-3xl relative shadow-2xl border border-white/10">
+      <button onclick="closeModal('adminDashboard')" class="absolute top-6 right-6 text-gray-400 text-3xl hover:text-white">&times;</button>
+      
+      <div class="flex justify-between items-center mb-8 pb-4 border-b border-white/10">
+        <div>
+          <h2 class="text-2xl md:text-3xl font-black text-white flex items-center gap-3">
+            <i class="fa-solid fa-sliders text-spiderAccent"></i> Admin Control Center
+          </h2>
+          <p class="text-xs text-gray-400 mt-1">Manage inventory and monitor incoming customer orders</p>
+        </div>
+        <span class="text-xs bg-spiderAccent/10 text-spiderAccent border border-spiderAccent/30 px-4 py-1.5 rounded-full font-bold uppercase tracking-wider">Manager: Rakib</span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        
+        <!-- Upload Form -->
+        <div class="bg-black/40 p-6 rounded-2xl border border-white/5 space-y-4">
+          <h3 class="text-lg font-bold text-white"><i class="fa-solid fa-cloud-arrow-up text
