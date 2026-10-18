@@ -7,7 +7,7 @@
   
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Three.js for Advanced 3D Flowing Wave Animation -->
+  <!-- Three.js Library -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -73,7 +73,7 @@
 
     #canvas-container {
       width: 100%;
-      height: 400px;
+      height: 380px;
       position: relative;
     }
   </style>
@@ -90,14 +90,14 @@
     </div>
 
     <div class="flex items-center gap-4">
-      <button onclick="openAdminPanel()" class="spider-btn text-white px-6 py-2.5 rounded-full font-bold text-sm shadow-xl flex items-center gap-2">
+      <button type="button" onclick="openAdminPanel()" class="spider-btn text-white px-6 py-2.5 rounded-full font-bold text-sm shadow-xl flex items-center gap-2">
         <i class="fa-solid fa-shield-halved text-spiderAccent"></i>
         <span>Admin Panel</span>
       </button>
     </div>
   </header>
 
-  <!-- Hero Showcase with Video-Inspired 3D Flowing Wave & Floating Apparel Cards -->
+  <!-- Hero Section with 3D Wave & Floating Cards -->
   <section class="pt-36 pb-20 px-6 max-w-7xl mx-auto">
     <div class="flex flex-col lg:flex-row items-center justify-between gap-12">
       
@@ -122,25 +122,17 @@
         </div>
       </div>
 
-      <!-- Advanced 3D Wave Canvas & Floating Apparel Cards Container -->
+      <!-- 3D Wave Container -->
       <div class="lg:w-1/2 w-full relative">
         <div class="glass-box rounded-3xl p-3 relative overflow-hidden shadow-2xl border border-white/10">
           <div id="canvas-container" class="rounded-2xl overflow-hidden flex items-center justify-center"></div>
           
-          <!-- Floating Apparel Cards (Shirt, T-Shirt, Pants Preview) -->
+          <!-- Floating Preview Cards -->
           <div class="absolute top-8 right-6 glass-box px-3.5 py-2.5 rounded-2xl border border-spiderAccent/30 shadow-xl animate-bounce hidden sm:flex items-center gap-3">
             <div class="w-10 h-10 rounded-xl bg-cover bg-center border border-white/10" style="background-image: url('https://images.unsplash.com/photo-1603252109303-2751441dd157?w=100')"></div>
             <div>
               <p class="text-[11px] font-bold text-white">Classic Shirt</p>
               <p class="text-[10px] text-spiderAccent font-mono">৳1,200</p>
-            </div>
-          </div>
-
-          <div class="absolute top-36 left-4 glass-box px-3.5 py-2.5 rounded-2xl border border-white/10 shadow-xl hidden sm:flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-cover bg-center border border-white/10" style="background-image: url('https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=100')"></div>
-            <div>
-              <p class="text-[11px] font-bold text-white">Graphic T-Shirt</p>
-              <p class="text-[10px] text-spiderAccent font-mono">৳850</p>
             </div>
           </div>
 
@@ -151,18 +143,13 @@
               <p class="text-[10px] text-spiderAccent font-mono">৳1,800</p>
             </div>
           </div>
-
-          <div class="absolute bottom-4 left-1/2 -translate-x-1/2 text-xs text-gray-400 flex items-center gap-2 bg-black/60 px-3 py-1 rounded-full backdrop-blur-md border border-white/10">
-            <i class="fa-solid fa-cube text-spiderAccent animate-spin"></i>
-            <span>Interactive 3D Wave Space</span>
-          </div>
         </div>
       </div>
 
     </div>
   </section>
 
-  <!-- Responsive Product Grid (2 Columns on Mobile) -->
+  <!-- Storefront Product Grid (2 columns on mobile) -->
   <section id="storefront" class="py-16 px-4 md:px-8 max-w-7xl mx-auto">
     <div class="flex justify-between items-end mb-8 px-2">
       <div>
@@ -171,7 +158,6 @@
       </div>
     </div>
 
-    <!-- 2 Columns Grid on Mobile, 3-4 on Desktop -->
     <div id="product-list" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
       
       <!-- Sample Item 1 (Shirt) -->
@@ -186,15 +172,12 @@
           
           <div class="flex flex-wrap gap-1.5 my-2.5">
             <span class="bg-white/5 border border-white/10 text-gray-300 text-[10px] px-2 py-0.5 rounded">Sizes: S - XXL</span>
-            <span class="bg-white/5 border border-white/10 text-gray-300 text-[10px] px-2 py-0.5 rounded">Navy Blue</span>
           </div>
         </div>
 
         <div class="flex flex-col gap-2 mt-3 pt-3 border-t border-white/10">
-          <div class="flex justify-between items-center">
-            <span class="text-spiderAccent text-base md:text-lg font-black">৳1,200</span>
-          </div>
-          <button onclick="openOrderModal('Spider Formal Cotton Shirt', '৳1,200')" class="spider-btn text-white w-full py-2 rounded-xl text-xs font-bold shadow-md">
+          <span class="text-spiderAccent text-base md:text-lg font-black">৳1,200</span>
+          <button type="button" onclick="openOrderModal('Spider Formal Cotton Shirt', '৳1,200')" class="spider-btn text-white w-full py-2 rounded-xl text-xs font-bold shadow-md">
             Order Now
           </button>
         </div>
@@ -212,15 +195,12 @@
           
           <div class="flex flex-wrap gap-1.5 my-2.5">
             <span class="bg-white/5 border border-white/10 text-gray-300 text-[10px] px-2 py-0.5 rounded">Sizes: S - XL</span>
-            <span class="bg-white/5 border border-white/10 text-gray-300 text-[10px] px-2 py-0.5 rounded">Matte Black</span>
           </div>
         </div>
 
         <div class="flex flex-col gap-2 mt-3 pt-3 border-t border-white/10">
-          <div class="flex justify-between items-center">
-            <span class="text-spiderAccent text-base md:text-lg font-black">৳850</span>
-          </div>
-          <button onclick="openOrderModal('Spider Cyber Graphic T-Shirt', '৳850')" class="spider-btn text-white w-full py-2 rounded-xl text-xs font-bold shadow-md">
+          <span class="text-spiderAccent text-base md:text-lg font-black">৳850</span>
+          <button type="button" onclick="openOrderModal('Spider Cyber Graphic T-Shirt', '৳850')" class="spider-btn text-white w-full py-2 rounded-xl text-xs font-bold shadow-md">
             Order Now
           </button>
         </div>
@@ -232,7 +212,7 @@
   <!-- Customer Order Confirmation Modal -->
   <div id="orderModal" class="fixed inset-0 bg-black/80 backdrop-blur-xl hidden z-50 flex items-center justify-center p-4">
     <div class="glass-box p-6 md:p-8 rounded-3xl w-full max-w-md relative shadow-2xl border border-white/10">
-      <button onclick="closeModal('orderModal')" class="absolute top-5 right-5 text-gray-400 text-2xl hover:text-white">&times;</button>
+      <button type="button" onclick="closeModal('orderModal')" class="absolute top-5 right-5 text-gray-400 text-2xl hover:text-white">&times;</button>
       
       <h3 class="text-2xl font-black text-white mb-1"><i class="fa-solid fa-bag-shopping text-spiderAccent mr-2"></i>Place Order</h3>
       <p id="orderProdName" class="text-xs font-medium text-spiderAccent mb-5 bg-white/5 p-3 rounded-xl border border-white/10"></p>
@@ -265,10 +245,10 @@
     </div>
   </div>
 
-  <!-- Admin Login Modal (Secure: Blank Password Field) -->
+  <!-- Admin Login Modal (Secure & Blank Password Field) -->
   <div id="loginModal" class="fixed inset-0 bg-black/85 backdrop-blur-xl hidden z-50 flex items-center justify-center p-4">
     <div class="glass-box p-6 md:p-8 rounded-3xl w-full max-w-md relative shadow-2xl border border-white/10">
-      <button onclick="closeModal('loginModal')" class="absolute top-5 right-5 text-gray-400 text-2xl hover:text-white">&times;</button>
+      <button type="button" onclick="closeModal('loginModal')" class="absolute top-5 right-5 text-gray-400 text-2xl hover:text-white">&times;</button>
       
       <h3 class="text-2xl font-black text-white mb-2"><i class="fa-solid fa-lock text-spiderAccent mr-2"></i>Merchant Login</h3>
       <p class="text-xs text-gray-400 mb-6 bg-white/5 p-3 rounded-xl border border-white/10">
@@ -290,7 +270,7 @@
   <!-- Admin Dashboard -->
   <div id="adminDashboard" class="fixed inset-0 bg-black/95 backdrop-blur-2xl hidden z-50 overflow-y-auto p-4 md:p-8">
     <div class="max-w-6xl mx-auto glass-box p-6 md:p-8 rounded-3xl relative shadow-2xl border border-white/10">
-      <button onclick="closeModal('adminDashboard')" class="absolute top-6 right-6 text-gray-400 text-3xl hover:text-white">&times;</button>
+      <button type="button" onclick="closeModal('adminDashboard')" class="absolute top-6 right-6 text-gray-400 text-3xl hover:text-white">&times;</button>
       
       <div class="flex justify-between items-center mb-8 pb-4 border-b border-white/10">
         <div>
@@ -306,4 +286,269 @@
         
         <!-- Upload Form -->
         <div class="bg-black/40 p-6 rounded-2xl border border-white/5 space-y-4">
-          <h3 class="text-lg font-bold text-white"><i class="fa-solid fa-cloud-arrow-up text
+          <h3 class="text-lg font-bold text-white"><i class="fa-solid fa-cloud-arrow-up text-spiderAccent mr-2"></i>Add New Product</h3>
+          
+          <form onsubmit="addNewProduct(event)" class="space-y-4">
+            <div>
+              <label class="block text-xs font-bold text-gray-300 mb-1 uppercase">Product Name</label>
+              <input id="pTitle" type="text" placeholder="e.g. Cotton Shirt / T-Shirt / Pants" required class="w-full bg-black/50 border border-white/10 rounded-xl p-3 text-white text-sm focus:outline-none">
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-bold text-gray-300 mb-1 uppercase">Price (৳)</label>
+                <input id="pPrice" type="text" placeholder="৳1,200" required class="w-full bg-black/50 border border-white/10 rounded-xl p-3 text-white text-sm focus:outline-none">
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-gray-300 mb-1 uppercase">Color</label>
+                <input id="pColor" type="text" placeholder="Black" required class="w-full bg-black/50 border border-white/10 rounded-xl p-3 text-white text-sm focus:outline-none">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-gray-300 mb-1 uppercase">Sizes / Waist Specs</label>
+              <input id="pSizes" type="text" placeholder="S, M, L, XL or Waist 30, 32" required class="w-full bg-black/50 border border-white/10 rounded-xl p-3 text-white text-sm focus:outline-none">
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-gray-300 mb-1 uppercase">Device Gallery Image Upload</label>
+              <input id="pImgFile" type="file" accept="image/*" required class="w-full bg-black/50 border border-white/10 rounded-xl p-2.5 text-white text-xs file:mr-3 file:py-1.5 file:px-4 file:rounded-lg file:border-0 file:bg-spiderGreen file:text-white cursor-pointer">
+            </div>
+
+            <button type="submit" class="spider-btn w-full py-3.5 rounded-xl font-bold text-white shadow-xl text-sm">
+              Publish Product to Store
+            </button>
+          </form>
+        </div>
+
+        <!-- Orders List -->
+        <div class="bg-black/40 p-6 rounded-2xl border border-white/5">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="text-lg font-bold text-white"><i class="fa-solid fa-list-check text-spiderAccent mr-2"></i>Customer Orders</h3>
+            <span id="orderCount" class="text-xs bg-spiderAccent/10 text-spiderAccent px-3 py-1 rounded-full font-bold">0 Orders</span>
+          </div>
+
+          <div id="ordersContainer" class="space-y-3 max-h-[400px] overflow-y-auto pr-1">
+            <p class="text-xs text-gray-500 text-center py-12">No orders logged yet.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Global JavaScript Engine -->
+  <script>
+    var isAuthenticated = false;
+    var selectedProdForOrder = '';
+    var selectedProdPrice = '';
+    var ordersList = [];
+
+    function closeModal(id) {
+      var modal = document.getElementById(id);
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function openAdminPanel() {
+      if (isAuthenticated) {
+        var dash = document.getElementById('adminDashboard');
+        if (dash) dash.classList.remove('hidden');
+      } else {
+        var login = document.getElementById('loginModal');
+        if (login) login.classList.remove('hidden');
+      }
+    }
+
+    function handleAdminLogin(e) {
+      e.preventDefault();
+      var passInput = document.getElementById('adminPass');
+      if (!passInput) return;
+      
+      var pass = passInput.value;
+      if (pass === 'rakib018786') {
+        isAuthenticated = true;
+        alert('✅ Welcome Admin Rakib!');
+        closeModal('loginModal');
+        passInput.value = ''; 
+        var dash = document.getElementById('adminDashboard');
+        if (dash) dash.classList.remove('hidden');
+      } else {
+        alert('❌ Invalid Password! Access Denied.');
+      }
+    }
+
+    function openOrderModal(prodName, prodPrice) {
+      selectedProdForOrder = prodName;
+      selectedProdPrice = prodPrice;
+      var nameEl = document.getElementById('orderProdName');
+      if (nameEl) nameEl.innerText = 'Product: ' + prodName + ' (' + prodPrice + ')';
+      var modal = document.getElementById('orderModal');
+      if (modal) modal.classList.remove('hidden');
+    }
+
+    function submitCustomerOrder(e) {
+      e.preventDefault();
+      var name = document.getElementById('custName').value;
+      var phone = document.getElementById('custPhone').value;
+      var size = document.getElementById('custSize').value;
+      var address = document.getElementById('custAddress').value;
+
+      var orderData = {
+        id: Date.now(),
+        product: selectedProdForOrder,
+        price: selectedProdPrice,
+        customerName: name,
+        phone: phone,
+        size: size,
+        address: address,
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      };
+
+      ordersList.unshift(orderData);
+      renderOrders();
+
+      alert('🎉 Thank you ' + name + '! Your order has been placed successfully.');
+      closeModal('orderModal');
+      e.target.reset();
+    }
+
+    function removeOrder(id) {
+      ordersList = ordersList.filter(function(ord) { return ord.id !== id; });
+      renderOrders();
+    }
+
+    function renderOrders() {
+      var container = document.getElementById('ordersContainer');
+      var countLabel = document.getElementById('orderCount');
+      if (!container || !countLabel) return;
+
+      countLabel.innerText = ordersList.length + ' Orders';
+
+      if (ordersList.length === 0) {
+        container.innerHTML = '<p class="text-xs text-gray-500 text-center py-12">No orders logged yet.</p>';
+        return;
+      }
+
+      container.innerHTML = '';
+      ordersList.forEach(function(ord, idx) {
+        var item = document.createElement('div');
+        item.className = 'p-4 bg-white/5 border border-white/10 rounded-2xl text-xs space-y-1.5 relative';
+        item.innerHTML = 
+          '<div class="flex justify-between font-bold text-spiderAccent">' +
+            '<span>#' + (ordersList.length - idx) + '. ' + ord.product + ' (' + ord.price + ')</span>' +
+            '<span class="text-gray-400 text-[10px]">' + ord.time + '</span>' +
+          '</div>' +
+          '<div class="text-gray-200"><b>Customer:</b> ' + ord.customerName + '</div>' +
+          '<div class="text-gray-200"><b>Phone:</b> <a href="tel:' + ord.phone + '" class="text-spiderAccent underline">' + ord.phone + '</a></div>' +
+          '<div class="text-gray-200"><b>Size:</b> ' + ord.size + '</div>' +
+          '<div class="text-gray-400"><b>Address:</b> ' + ord.address + '</div>' +
+          '<div class="flex justify-end pt-2 border-t border-white/5">' +
+            '<button type="button" onclick="removeOrder(' + ord.id + ')" class="text-red-400 hover:text-red-300 text-[11px] font-bold cursor-pointer">' +
+              '<i class="fa-solid fa-trash mr-1"></i>Delete Order' +
+            '</button>' +
+          '</div>';
+        container.appendChild(item);
+      });
+    }
+
+    function addNewProduct(e) {
+      e.preventDefault();
+      var title = document.getElementById('pTitle').value;
+      var price = document.getElementById('pPrice').value;
+      var color = document.getElementById('pColor').value;
+      var sizes = document.getElementById('pSizes').value;
+      var fileInput = document.getElementById('pImgFile');
+
+      if (!fileInput || !fileInput.files[0]) return;
+
+      var file = fileInput.files[0];
+      var reader = new FileReader();
+      reader.onload = function(evt) {
+        var imgUrl = evt.target.result;
+
+        var card = document.createElement('div');
+        card.className = 'glass-box rounded-2xl p-4 flex flex-col justify-between spider-card relative group';
+        card.innerHTML = 
+          '<div>' +
+            '<div class="h-44 md:h-56 rounded-xl bg-black/50 mb-3 overflow-hidden relative border border-white/5">' +
+              '<img src="' + imgUrl + '" class="object-cover h-full w-full group-hover:scale-105 transition duration-500">' +
+              '<span class="absolute top-2.5 right-2.5 bg-spiderAccent text-black text-[10px] font-black px-2.5 py-0.5 rounded-full uppercase">New</span>' +
+            '</div>' +
+            '<h3 class="font-bold text-sm md:text-base text-white tracking-wide truncate">' + title + '</h3>' +
+            '<div class="flex flex-wrap gap-1.5 my-2.5">' +
+              '<span class="bg-white/5 border border-white/10 text-gray-300 text-[10px] px-2 py-0.5 rounded">Sizes: ' + sizes + '</span>' +
+              '<span class="bg-white/5 border border-white/10 text-gray-300 text-[10px] px-2 py-0.5 rounded">' + color + '</span>' +
+            '</div>' +
+          '</div>' +
+          '<div class="flex flex-col gap-2 mt-3 pt-3 border-t border-white/10">' +
+            '<span class="text-spiderAccent text-base md:text-lg font-black">' + price + '</span>' +
+            '<button type="button" onclick="openOrderModal(\'' + title.replace(/'/g, "\\'") + '\', \'' + price + '\')" class="spider-btn text-white w-full py-2 rounded-xl text-xs font-bold shadow-md">' +
+              'Order Now' +
+            '</button>' +
+          '</div>';
+        
+        var listEl = document.getElementById('product-list');
+        if (listEl) listEl.prepend(card);
+        alert('✅ New product published successfully!');
+        e.target.reset();
+      };
+
+      reader.readAsDataURL(file);
+    }
+
+    // Three.js 3D Wave Animation Engine
+    window.addEventListener('DOMContentLoaded', function() {
+      var container = document.getElementById('canvas-container');
+      if (!container) return;
+      
+      var scene = new THREE.Scene();
+      var camera = new THREE.PerspectiveCamera(60, container.clientWidth / container.clientHeight, 0.1, 1000);
+      var renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+      
+      renderer.setSize(container.clientWidth, container.clientHeight);
+      container.appendChild(renderer.domElement);
+
+      var geometry = new THREE.PlaneGeometry(6, 3, 30, 15);
+      var material = new THREE.MeshBasicMaterial({ 
+        color: 0x00FFA3, 
+        wireframe: true,
+        transparent: true,
+        opacity: 0.35
+      });
+      var waveMesh = new THREE.Mesh(geometry, material);
+      scene.add(waveMesh);
+
+      camera.position.z = 4;
+      camera.position.y = -0.5;
+      waveMesh.rotation.x = -0.4;
+
+      var clock = new THREE.Clock();
+
+      function animate() {
+        requestAnimationFrame(animate);
+        var time = clock.getElapsedTime();
+        
+        var position = geometry.attributes.position;
+        for (var i = 0; i < position.count; i++) {
+          var u = position.getX(i);
+          var v = position.getY(i);
+          var z = Math.sin(u + time * 1.5) * 0.3 + Math.cos(v + time * 1.2) * 0.3;
+          position.setZ(i, z);
+        }
+        geometry.attributes.position.needsUpdate = true;
+        
+        waveMesh.rotation.z = time * 0.1;
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      window.addEventListener('resize', function() {
+        if (!container) return;
+        camera.aspect = container.clientWidth / container.clientHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(container.clientWidth, container.clientHeight);
+      });
+    });
+  </script>
+</body>
+  </html>
