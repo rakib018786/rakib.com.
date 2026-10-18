@@ -3,387 +3,352 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SPIDER — Flagship Store Platform</title>
+  <title>SPIDER — The Obsidian Luxury Store</title>
   
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Three.js Library -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <!-- FontAwesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts: Inter & Instrument Serif -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
 
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            spiderBg: '#05050A',
-            spiderCard: '#0B0F19',
-            spiderAccent: '#00FFA3',
-            spiderGreen: '#008060'
-          }
-        }
-      }
-    }
-  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
     body {
-      background-color: #05050A;
-      color: #FFFFFF;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: #08080C;
+      color: #EDEDED;
+      font-family: 'Inter', sans-serif;
       overflow-x: hidden;
-    }
-    
-    .bg-mesh {
-      background-image: radial-gradient(rgba(0, 255, 163, 0.05) 1px, transparent 0);
-      background-size: 32px 32px;
+      margin: 0;
     }
 
-    .glass-box {
-      background: rgba(11, 15, 25, 0.85);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+    .serif-title {
+      font-family: 'Instrument Serif', serif;
     }
 
-    .glass-nav {
-      background: rgba(5, 5, 10, 0.85);
+    /* Full-Screen 3D Interactive Luxury Background Covering Top to Bottom */
+    #bg-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .glass-luxury {
+      background: rgba(18, 20, 30, 0.78);
       backdrop-filter: blur(25px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
     }
 
-    .spider-card {
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .spider-card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(0, 255, 163, 0.4);
-      box-shadow: 0 15px 35px -10px rgba(0, 255, 163, 0.2);
-    }
-
-    .spider-btn {
-      background-color: #008060;
+    .btn-luxury {
+      background-color: #EDEDED;
+      color: #08080C;
       transition: all 0.3s ease;
       cursor: pointer;
     }
-    .spider-btn:hover {
-      background-color: #005C45;
-      box-shadow: 0 0 20px rgba(0, 255, 163, 0.3);
+    .btn-luxury:hover {
+      background-color: #FFFFFF;
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
     }
 
-    #canvas-container {
-      width: 100%;
-      height: 400px;
-      position: relative;
+    .store-card {
+      transition: transform 0.4s ease, border-color 0.4s ease;
+    }
+    .store-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .size-btn {
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    .size-btn.active {
+      border-color: #FFFFFF;
+      background-color: #FFFFFF;
+      color: #08080C;
+      font-weight: 700;
     }
   </style>
 </head>
-<body class="antialiased bg-mesh selection:bg-spiderAccent selection:text-black">
+<body class="antialiased selection:bg-white selection:text-black">
+
+  <!-- Full-Screen 3D Luxury Background Animation Engine -->
+  <div id="bg-canvas"></div>
 
   <!-- Header Navigation -->
-  <header class="fixed top-0 left-0 w-full z-50 glass-nav px-6 lg:px-12 py-4 flex justify-between items-center">
-    <div class="flex items-center gap-3">
-      <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-spiderGreen to-spiderAccent flex items-center justify-center text-black font-black shadow-lg shadow-spiderAccent/20">
-        <i class="fa-solid fa-spider text-xl"></i>
-      </div>
-      <span class="text-2xl font-black tracking-widest text-white uppercase">SPIDER</span>
+  <header class="fixed top-0 left-0 w-full z-50 bg-[#08080C]/80 backdrop-blur-md border-b border-white/10 px-6 lg:px-12 py-4 flex justify-between items-center">
+    <div class="flex items-center gap-6">
+      <span class="text-xl font-black tracking-widest text-white uppercase serif-title text-2xl">SPIDER // REGENT</span>
     </div>
 
     <div class="flex items-center gap-4">
-      <button type="button" onclick="openAdminPanel()" class="spider-btn text-white px-6 py-2.5 rounded-full font-bold text-sm shadow-xl flex items-center gap-2">
-        <i class="fa-solid fa-shield-halved text-spiderAccent"></i>
+      <button type="button" onclick="openAdminPanel()" class="btn-luxury px-5 py-2.5 rounded-full font-bold text-xs shadow-md flex items-center gap-2">
+        <i class="fa-solid fa-shield-halved text-black"></i>
         <span>Admin Panel</span>
       </button>
     </div>
   </header>
 
-  <!-- Hero Section with Advanced 3D Wave & Floating Cards -->
-  <section class="pt-36 pb-20 px-6 max-w-7xl mx-auto">
-    <div class="flex flex-col lg:flex-row items-center justify-between gap-12">
+  <!-- Hero Section -->
+  <section class="pt-36 pb-24 px-6 max-w-7xl mx-auto text-center relative z-10">
+    <div class="space-y-6 max-w-3xl mx-auto">
+      <span class="text-xs font-mono font-bold tracking-widest text-gray-400 uppercase tracking-widest bg-white/5 border border-white/10 px-4 py-1.5 rounded-full">Tailored From Shadow</span>
       
-      <div class="lg:w-1/2 space-y-6 text-center lg:text-left">
-        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-spiderAccent text-xs font-bold uppercase tracking-wider">
-          <span class="w-2 h-2 rounded-full bg-spiderAccent animate-pulse"></span> Flagship Streetwear Collection
-        </div>
-        
-        <h1 class="text-4xl lg:text-6xl font-black tracking-tight leading-tight text-white">
-          YOUR STORE'S COMMAND <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-spiderAccent to-spiderGreen">CENTER FOR STYLE.</span>
-        </h1>
-        
-        <p class="text-gray-400 text-base font-normal max-w-lg mx-auto lg:mx-0">
-          Discover premium shirts, stylish t-shirts, custom hoodies & waist-fitted pants. Order instantly via our secure merchant system.
-        </p>
+      <h1 class="text-5xl lg:text-8xl font-black tracking-tight leading-none text-white">
+        The Obsidian <br><span class="serif-title italic font-normal text-6xl lg:text-9xl text-gray-400">Polo</span>
+      </h1>
+      
+      <p class="text-gray-400 text-sm md:text-base font-normal max-w-lg mx-auto tracking-wide">
+        Simple pour of midnight cotton. The Obsidian merges fully formed — no seam declared, no shadow gout. Presence, long before pattern[span_2](start_span)[span_2](end_span).
+      </p>
 
-        <div class="pt-2 flex justify-center lg:justify-start">
-          <a href="#storefront" class="spider-btn text-white px-8 py-3.5 rounded-full font-bold text-base shadow-2xl flex items-center gap-3">
-            <span>Explore Collection</span>
-            <i class="fa-solid fa-arrow-down-long"></i>
-          </a>
-        </div>
+      <div class="pt-4">
+        <a href="#storefront" class="btn-luxury px-8 py-4 rounded-full font-bold text-sm tracking-widest uppercase inline-block shadow-2xl">
+          Scroll to Explore
+        </a>
       </div>
-
-      <!-- Advanced 3D Wave Container with Pure White & Clean Gradient -->
-      <div class="lg:w-1/2 w-full relative">
-        <div class="glass-box rounded-3xl p-3 relative overflow-hidden shadow-2xl border border-white/10">
-          <div id="canvas-container" class="rounded-2xl overflow-hidden flex items-center justify-center"></div>
-          
-          <!-- Floating Preview Cards -->
-          <div class="absolute top-8 right-6 glass-box px-3.5 py-2.5 rounded-2xl border border-spiderAccent/30 shadow-xl animate-bounce hidden sm:flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-cover bg-center border border-white/10" style="background-image: url('https://images.unsplash.com/photo-1603252109303-2751441dd157?w=100')"></div>
-            <div>
-              <p class="text-[11px] font-bold text-white">Classic Shirt</p>
-              <p class="text-[10px] text-spiderAccent font-mono">৳1,200</p>
-            </div>
-          </div>
-
-          <div class="absolute bottom-12 left-6 glass-box px-3.5 py-2.5 rounded-2xl border border-white/10 shadow-xl hidden sm:flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-cover bg-center border border-white/10" style="background-image: url('https://images.unsplash.com/photo-1542272604-787c3835535d?w=100')"></div>
-            <div>
-              <p class="text-[11px] font-bold text-white">Denim Pants</p>
-              <p class="text-[10px] text-spiderAccent font-mono">৳1,800</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
     </div>
   </section>
 
-  <!-- Storefront Product Grid (2 columns on mobile) -->
-  <section id="storefront" class="py-16 px-4 md:px-8 max-w-7xl mx-auto">
-    <div class="flex justify-between items-end mb-8 px-2">
+  <!-- Storefront Apparel Catalog -->
+  <section id="storefront" class="py-20 px-4 md:px-8 max-w-7xl mx-auto relative z-10">
+    <div class="flex justify-between items-end mb-10 px-2">
       <div>
-        <span class="text-spiderAccent text-xs font-bold uppercase tracking-widest">Inventory Catalog</span>
-        <h2 class="text-2xl md:text-4xl font-black text-white mt-1">Featured Store Products</h2>
+        <span class="text-gray-400 text-xs font-bold uppercase tracking-widest font-mono">The Collection</span>
+        <h2 class="text-3xl md:text-5xl font-black text-white mt-1 serif-title italic">Featured Masterpieces</h2>
       </div>
     </div>
 
-    <div id="product-list" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+    <div id="product-list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       
-      <!-- Sample Item 1 (Shirt) -->
-      <div class="glass-box rounded-2xl p-4 flex flex-col justify-between spider-card relative group">
+      <!-- Default Luxury Item -->
+      <div class="glass-luxury rounded-3xl p-4 flex flex-col justify-between store-card">
         <div>
-          <div class="h-44 md:h-56 rounded-xl bg-black/50 mb-3 overflow-hidden relative border border-white/5">
-            <img src="https://images.unsplash.com/photo-1603252109303-2751441dd157?w=800" class="object-cover h-full w-full group-hover:scale-105 transition duration-500" alt="Shirt">
-            <span class="absolute top-2.5 right-2.5 bg-spiderAccent text-black text-[10px] font-black px-2.5 py-0.5 rounded-full uppercase">In Stock</span>
+          <div class="h-60 rounded-2xl bg-black mb-4 overflow-hidden relative border border-white/10">
+            <img src="https://images.unsplash.com/photo-1603252109303-2751441dd157?w=800" class="object-cover h-full w-full opacity-90 hover:scale-105 transition duration-500" alt="Polo">
+            <span class="absolute top-3 right-3 bg-white text-black text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider">Edition No. 01</span>
           </div>
-
-          <h3 class="font-bold text-sm md:text-base text-white tracking-wide truncate">Spider Formal Cotton Shirt</h3>
-          
-          <div class="flex flex-wrap gap-1.5 my-2.5">
-            <span class="bg-white/5 border border-white/10 text-gray-300 text-[10px] px-2 py-0.5 rounded">Sizes: S - XXL</span>
-          </div>
+          <h3 class="font-bold text-lg text-white tracking-wide">The Crown Crest Polo</h3>
+          <p class="text-xs text-gray-400 mt-1">Color: <span class="text-white font-semibold">Midnight Black</span> | Sizes: <span class="text-white font-semibold">S, M, L, XL</span></p>
+          <p class="text-xs text-gray-500 mt-2 line-clamp-2">Embossed, never printed. Black upon stock. A century of making, pressed quietly into the chest[span_3](start_span)[span_3](end_span).</p>
         </div>
-
-        <div class="flex flex-col gap-2 mt-3 pt-3 border-t border-white/10">
-          <span class="text-spiderAccent text-base md:text-lg font-black">৳1,200</span>
-          <button type="button" onclick="openOrderModal('Spider Formal Cotton Shirt', '৳1,200')" class="spider-btn text-white w-full py-2 rounded-xl text-xs font-bold shadow-md">
-            Order Now
-          </button>
-        </div>
-      </div>
-
-      <!-- Sample Item 2 (T-Shirt) -->
-      <div class="glass-box rounded-2xl p-4 flex flex-col justify-between spider-card relative group">
-        <div>
-          <div class="h-44 md:h-56 rounded-xl bg-black/50 mb-3 overflow-hidden relative border border-white/5">
-            <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=800" class="object-cover h-full w-full group-hover:scale-105 transition duration-500" alt="T-Shirt">
-            <span class="absolute top-2.5 right-2.5 bg-spiderAccent text-black text-[10px] font-black px-2.5 py-0.5 rounded-full uppercase">In Stock</span>
-          </div>
-
-          <h3 class="font-bold text-sm md:text-base text-white tracking-wide truncate">Spider Cyber Graphic T-Shirt</h3>
-          
-          <div class="flex flex-wrap gap-1.5 my-2.5">
-            <span class="bg-white/5 border border-white/10 text-gray-300 text-[10px] px-2 py-0.5 rounded">Sizes: S - XL</span>
-          </div>
-        </div>
-
-        <div class="flex flex-col gap-2 mt-3 pt-3 border-t border-white/10">
-          <span class="text-spiderAccent text-base md:text-lg font-black">৳850</span>
-          <button type="button" onclick="openOrderModal('Spider Cyber Graphic T-Shirt', '৳850')" class="spider-btn text-white w-full py-2 rounded-xl text-xs font-bold shadow-md">
-            Order Now
-          </button>
+        <div class="flex flex-col gap-3 mt-5 pt-4 border-t border-white/10">
+          <span class="text-white text-xl font-black font-mono">৳2,850</span>
+          <button type="button" onclick="openOrderModal('The Crown Crest Polo', '৳2,850', 'Midnight Black', 'S, M, L, XL', 'https://images.unsplash.com/photo-1603252109303-2751441dd157?w=800', 'Embossed, never printed. Black upon stock.')" class="btn-luxury w-full py-3 rounded-xl text-xs font-bold uppercase tracking-wider">Reserve Edition</button>
         </div>
       </div>
 
     </div>
   </section>
 
-  <!-- Customer Order Confirmation Modal -->
-  <div id="orderModal" class="fixed inset-0 bg-black/80 backdrop-blur-xl hidden z-50 flex items-center justify-center p-4">
-    <div class="glass-box p-6 md:p-8 rounded-3xl w-full max-w-md relative shadow-2xl border border-white/10">
+  <!-- Customer Order Modal -->
+  <div id="orderModal" class="fixed inset-0 bg-black/80 backdrop-blur-md hidden z-50 flex items-center justify-center p-4 overflow-y-auto">
+    <div class="glass-luxury p-6 md:p-8 rounded-3xl w-full max-w-md relative shadow-2xl border border-white/10 my-8">
       <button type="button" onclick="closeModal('orderModal')" class="absolute top-5 right-5 text-gray-400 text-2xl hover:text-white">&times;</button>
       
-      <h3 class="text-2xl font-black text-white mb-1"><i class="fa-solid fa-bag-shopping text-spiderAccent mr-2"></i>Place Order</h3>
-      <p id="orderProdName" class="text-xs font-medium text-spiderAccent mb-5 bg-white/5 p-3 rounded-xl border border-white/10"></p>
+      <h3 class="text-2xl font-black text-white mb-4 serif-title italic">Reserve The Obsidian</h3>
+      
+      <!-- Product Preview Box at Top -->
+      <div class="bg-white/5 p-4 rounded-2xl border border-white/10 flex items-center gap-4 mb-5">
+        <img id="orderModalImg" src="" class="w-16 h-16 rounded-xl object-cover border border-white/20">
+        <div class="overflow-hidden">
+          <h4 id="orderModalTitle" class="font-bold text-sm text-white truncate"></h4>
+          <p id="orderModalPrice" class="text-gray-300 font-black text-sm font-mono"></p>
+          <p id="orderModalMeta" class="text-[11px] text-gray-400 truncate mt-0.5"></p>
+        </div>
+      </div>
 
       <form onsubmit="submitCustomerOrder(event)" class="space-y-3.5">
         <div>
-          <label class="block text-xs font-bold text-gray-300 mb-1 uppercase">Full Name</label>
-          <input id="custName" type="text" placeholder="e.g. Md Rakib" required class="w-full bg-black/50 border border-white/10 rounded-xl p-3 text-white focus:border-spiderAccent focus:outline-none text-sm">
+          <label class="block text-xs font-bold text-gray-400 mb-1 uppercase tracking-wider">Full Name</label>
+          <input id="custName" type="text" placeholder="e.g. Md Rakib" required class="w-full bg-black/50 border border-white/10 rounded-xl p-3 text-white focus:border-white focus:outline-none text-sm">
         </div>
-
         <div>
-          <label class="block text-xs font-bold text-gray-300 mb-1 uppercase">Phone Number</label>
-          <input id="custPhone" type="tel" placeholder="018XXXXXXXX" required class="w-full bg-black/50 border border-white/10 rounded-xl p-3 text-white focus:border-spiderAccent focus:outline-none text-sm">
+          <label class="block text-xs font-bold text-gray-400 mb-1 uppercase tracking-wider">Phone Number</label>
+          <input id="custPhone" type="tel" placeholder="018XXXXXXXX" required class="w-full bg-black/50 border border-white/10 rounded-xl p-3 text-white focus:border-white focus:outline-none text-sm">
         </div>
-
         <div>
-          <label class="block text-xs font-bold text-gray-300 mb-1 uppercase">Size / Waist Spec</label>
-          <input id="custSize" type="text" placeholder="e.g. L or Waist 32" required class="w-full bg-black/50 border border-white/10 rounded-xl p-3 text-white focus:border-spiderAccent focus:outline-none text-sm">
+          <label class="block text-xs font-bold text-gray-400 mb-1 uppercase tracking-wider">Select Size</label>
+          <div id="orderSizeButtons" class="flex gap-2"></div>
+          <input id="custSize" type="hidden" required>
         </div>
-
         <div>
-          <label class="block text-xs font-bold text-gray-300 mb-1 uppercase">Delivery Address</label>
-          <textarea id="custAddress" placeholder="House, Road, Area, City" required class="w-full bg-black/50 border border-white/10 rounded-xl p-3 text-white focus:border-spiderAccent focus:outline-none text-sm h-20"></textarea>
+          <label class="block text-xs font-bold text-gray-400 mb-1 uppercase tracking-wider">Delivery Address</label>
+          <textarea id="custAddress" placeholder="House, Road, Area, City" required class="w-full bg-black/50 border border-white/10 rounded-xl p-3 text-white focus:border-white focus:outline-none text-sm h-20"></textarea>
         </div>
-
-        <button type="submit" class="spider-btn w-full py-3.5 rounded-xl font-bold text-white shadow-xl text-sm mt-2">
-          Confirm Order
-        </button>
+        <button type="submit" class="btn-luxury w-full py-3.5 rounded-xl font-bold text-black shadow-lg text-sm mt-2 uppercase tracking-wider">Confirm Reservation</button>
       </form>
     </div>
   </div>
 
   <!-- Admin Login Modal -->
-  <div id="loginModal" class="fixed inset-0 bg-black/85 backdrop-blur-xl hidden z-50 flex items-center justify-center p-4">
-    <div class="glass-box p-6 md:p-8 rounded-3xl w-full max-w-md relative shadow-2xl border border-white/10">
+  <div id="loginModal" class="fixed inset-0 bg-black/85 backdrop-blur-md hidden z-50 flex items-center justify-center p-4">
+    <div class="glass-luxury p-6 md:p-8 rounded-3xl w-full max-w-md relative shadow-2xl border border-white/10">
       <button type="button" onclick="closeModal('loginModal')" class="absolute top-5 right-5 text-gray-400 text-2xl hover:text-white">&times;</button>
-      
-      <h3 class="text-2xl font-black text-white mb-2"><i class="fa-solid fa-lock text-spiderAccent mr-2"></i>Merchant Login</h3>
-      <p class="text-xs text-gray-400 mb-6 bg-white/5 p-3 rounded-xl border border-white/10">
-        Enter administrator password to access control panel.
-      </p>
-      
+      <h3 class="text-2xl font-black text-white mb-2 serif-title italic">Merchant Access</h3>
+      <p class="text-xs text-gray-400 mb-6 bg-white/5 p-3 rounded-xl border border-white/10">Enter administrator password to access control panel.</p>
       <form onsubmit="handleAdminLogin(event)" class="space-y-4">
         <div>
-          <label class="block text-xs font-bold text-gray-300 mb-1 uppercase">Password</label>
-          <input id="adminPass" type="password" placeholder="" autocomplete="off" required class="w-full bg-black/50 border border-white/10 rounded-xl p-3 text-white focus:border-spiderAccent focus:outline-none text-sm">
+          <label class="block text-xs font-bold text-gray-400 mb-1 uppercase tracking-wider">Password</label>
+          <input id="adminPass" type="password" placeholder="" autocomplete="off" required class="w-full bg-black/50 border border-white/10 rounded-xl p-3 text-white focus:border-white focus:outline-none text-sm">
         </div>
-        <button type="submit" class="spider-btn w-full py-3.5 rounded-xl font-bold text-white shadow-xl text-sm">
-          Access Dashboard
-        </button>
+        <button type="submit" class="btn-luxury w-full py-3.5 rounded-xl font-bold text-black shadow-lg text-sm uppercase tracking-wider">Authorize</button>
       </form>
     </div>
   </div>
 
   <!-- Admin Dashboard -->
   <div id="adminDashboard" class="fixed inset-0 bg-black/95 backdrop-blur-2xl hidden z-50 overflow-y-auto p-4 md:p-8">
-    <div class="max-w-6xl mx-auto glass-box p-6 md:p-8 rounded-3xl relative shadow-2xl border border-white/10">
+    <div class="max-w-6xl mx-auto glass-luxury p-6 md:p-8 rounded-3xl relative shadow-2xl border border-white/10">
       <button type="button" onclick="closeModal('adminDashboard')" class="absolute top-6 right-6 text-gray-400 text-3xl hover:text-white">&times;</button>
-      
       <div class="flex justify-between items-center mb-8 pb-4 border-b border-white/10">
         <div>
-          <h2 class="text-2xl md:text-3xl font-black text-white flex items-center gap-3">
-            <i class="fa-solid fa-sliders text-spiderAccent"></i> Admin Control Center
-          </h2>
-          <p class="text-xs text-gray-400 mt-1">Manage inventory and monitor incoming customer orders</p>
+          <h2 class="text-2xl md:text-3xl font-black text-white serif-title italic">Admin Control Center</h2>
+          <p class="text-xs text-gray-400 mt-1">Manage luxury inventory and monitor incoming reservations</p>
         </div>
-        <span class="text-xs bg-spiderAccent/10 text-spiderAccent border border-spiderAccent/30 px-4 py-1.5 rounded-full font-bold uppercase tracking-wider">Manager: Rakib</span>
+        <span class="text-xs bg-white/10 text-white border border-white/20 px-4 py-1.5 rounded-full font-bold uppercase tracking-wider">Manager: Rakib</span>
       </div>
-
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        
-        <!-- Upload Form -->
         <div class="bg-black/40 p-6 rounded-2xl border border-white/5 space-y-4">
-          <h3 class="text-lg font-bold text-white"><i class="fa-solid fa-cloud-arrow-up text-spiderAccent mr-2"></i>Add New Product</h3>
-          
+          <h3 class="text-lg font-bold text-white">Publish New Masterpiece</h3>
           <form onsubmit="addNewProduct(event)" class="space-y-4">
             <div>
-              <label class="block text-xs font-bold text-gray-300 mb-1 uppercase">Product Name</label>
-              <input id="pTitle" type="text" placeholder="e.g. Cotton Shirt / T-Shirt / Pants" required class="w-full bg-black/50 border border-white/10 rounded-xl p-3 text-white text-sm focus:outline-none">
+              <label class="block text-xs font-bold text-gray-400 mb-1 uppercase tracking-wider">Product Name</label>
+              <input id="pTitle" type="text" placeholder="e.g. The Obsidian Polo" required class="w-full bg-black/50 border border-white/10 rounded-xl p-3 text-white text-sm focus:outline-none">
             </div>
-
             <div class="grid grid-cols-2 gap-3">
               <div>
-                <label class="block text-xs font-bold text-gray-300 mb-1 uppercase">Price (৳)</label>
-                <input id="pPrice" type="text" placeholder="৳1,200" required class="w-full bg-black/50 border border-white/10 rounded-xl p-3 text-white text-sm focus:outline-none">
+                <label class="block text-xs font-bold text-gray-400 mb-1 uppercase tracking-wider">Price (৳)</label>
+                <input id="pPrice" type="text" placeholder="৳2,850" required class="w-full bg-black/50 border border-white/10 rounded-xl p-3 text-white text-sm focus:outline-none">
               </div>
               <div>
-                <label class="block text-xs font-bold text-gray-300 mb-1 uppercase">Color</label>
-                <input id="pColor" type="text" placeholder="Black" required class="w-full bg-black/50 border border-white/10 rounded-xl p-3 text-white text-sm focus:outline-none">
+                <label class="block text-xs font-bold text-gray-400 mb-1 uppercase tracking-wider">Color</label>
+                <select id="pColor" class="w-full bg-black/50 border border-white/10 rounded-xl p-3 text-white text-sm focus:outline-none">
+                  <option value="Midnight Black">Midnight Black</option>
+                  <option value="Obsidian Grey">Obsidian Grey</option>
+                  <option value="Shadow Navy">Shadow Navy</option>
+                </select>
               </div>
             </div>
-
+            
             <div>
-              <label class="block text-xs font-bold text-gray-300 mb-1 uppercase">Sizes / Waist Specs</label>
-              <input id="pSizes" type="text" placeholder="S, M, L, XL or Waist 30, 32" required class="w-full bg-black/50 border border-white/10 rounded-xl p-3 text-white text-sm focus:outline-none">
+              <label class="block text-xs font-bold text-gray-400 mb-1.5 uppercase tracking-wider">Select Available Sizes</label>
+              <div class="flex gap-2">
+                <button type="button" onclick="toggleAdminSize('S', this)" class="size-btn flex-1 py-2.5 rounded-xl border border-white/10 bg-black/50 text-xs font-bold text-white">S</button>
+                <button type="button" onclick="toggleAdminSize('M', this)" class="size-btn flex-1 py-2.5 rounded-xl border border-white/10 bg-black/50 text-xs font-bold text-white">M</button>
+                <button type="button" onclick="toggleAdminSize('L', this)" class="size-btn flex-1 py-2.5 rounded-xl border border-white/10 bg-black/50 text-xs font-bold text-white">L</button>
+                <button type="button" onclick="toggleAdminSize('XL', this)" class="size-btn flex-1 py-2.5 rounded-xl border border-white/10 bg-black/50 text-xs font-bold text-white">XL</button>
+              </div>
+              <input id="pSizes" type="hidden" required>
             </div>
 
             <div>
-              <label class="block text-xs font-bold text-gray-300 mb-1 uppercase">Device Gallery Image Upload</label>
-              <input id="pImgFile" type="file" accept="image/*" required class="w-full bg-black/50 border border-white/10 rounded-xl p-2.5 text-white text-xs file:mr-3 file:py-1.5 file:px-4 file:rounded-lg file:border-0 file:bg-spiderGreen file:text-white cursor-pointer">
+              <label class="block text-xs font-bold text-gray-400 mb-1 uppercase tracking-wider">Product Description & Info</label>
+              <textarea id="pDesc" placeholder="Write fabric details, craftsmanship notes..." required class="w-full bg-black/50 border border-white/10 rounded-xl p-3 text-white text-sm focus:outline-none h-20"></textarea>
             </div>
 
-            <button type="submit" class="spider-btn w-full py-3.5 rounded-xl font-bold text-white shadow-xl text-sm">
-              Publish Product to Store
-            </button>
+            <div>
+              <label class="block text-xs font-bold text-gray-400 mb-1 uppercase tracking-wider">Device Gallery Image Upload</label>
+              <input id="pImgFile" type="file" accept="image/*" required class="w-full bg-black/50 border border-white/10 rounded-xl p-2 text-white text-xs file:mr-3 file:py-1.5 file:px-4 file:rounded-lg file:border-0 file:bg-white file:text-black cursor-pointer">
+            </div>
+            <button type="submit" class="btn-luxury w-full py-3.5 rounded-xl font-bold text-black shadow-lg text-sm uppercase tracking-wider">Publish Masterpiece</button>
           </form>
         </div>
-
-        <!-- Orders List -->
         <div class="bg-black/40 p-6 rounded-2xl border border-white/5">
           <div class="flex justify-between items-center mb-4">
-            <h3 class="text-lg font-bold text-white"><i class="fa-solid fa-list-check text-spiderAccent mr-2"></i>Customer Orders</h3>
-            <span id="orderCount" class="text-xs bg-spiderAccent/10 text-spiderAccent px-3 py-1 rounded-full font-bold">0 Orders</span>
+            <h3 class="text-lg font-bold text-white serif-title italic">Customer Reservations</h3>
+            <span id="orderCount" class="text-xs bg-white/10 text-white px-3 py-1 rounded-full font-bold">0 Orders</span>
           </div>
-
           <div id="ordersContainer" class="space-y-3 max-h-[400px] overflow-y-auto pr-1">
-            <p class="text-xs text-gray-500 text-center py-12">No orders logged yet.</p>
+            <p class="text-xs text-gray-500 text-center py-12">No reservations logged yet.</p>
           </div>
         </div>
-
       </div>
     </div>
   </div>
 
-  <!-- Global JavaScript Engine -->
+  <!-- JavaScript Engine -->
   <script>
     var isAuthenticated = false;
     var selectedProdForOrder = '';
     var selectedProdPrice = '';
     var ordersList = [];
+    var adminSelectedSizes = [];
 
     function closeModal(id) {
-      var modal = document.getElementById(id);
-      if (modal) modal.classList.add('hidden');
+      document.getElementById(id).classList.add('hidden');
     }
 
     function openAdminPanel() {
       if (isAuthenticated) {
-        var dash = document.getElementById('adminDashboard');
-        if (dash) dash.classList.remove('hidden');
+        document.getElementById('adminDashboard').classList.remove('hidden');
       } else {
-        var login = document.getElementById('loginModal');
-        if (login) login.classList.remove('hidden');
+        document.getElementById('loginModal').classList.remove('hidden');
       }
     }
 
     function handleAdminLogin(e) {
       e.preventDefault();
-      var passInput = document.getElementById('adminPass');
-      if (!passInput) return;
-      
-      var pass = passInput.value;
+      var pass = document.getElementById('adminPass').value;
       if (pass === 'rakib018786') {
         isAuthenticated = true;
         alert('✅ Welcome Admin Rakib!');
         closeModal('loginModal');
-        passInput.value = ''; 
-        var dash = document.getElementById('adminDashboard');
-        if (dash) dash.classList.remove('hidden');
+        document.getElementById('adminPass').value = '';
+        document.getElementById('adminDashboard').classList.remove('hidden');
       } else {
         alert('❌ Invalid Password! Access Denied.');
       }
     }
 
-    function openOrderModal(prodName, prodPrice) {
+    function toggleAdminSize(size, btn) {
+      btn.classList.toggle('active');
+      if (adminSelectedSizes.includes(size)) {
+        adminSelectedSizes = adminSelectedSizes.filter(s => s !== size);
+      } else {
+        adminSelectedSizes.push(size);
+      }
+      document.getElementById('pSizes').value = adminSelectedSizes.join(', ');
+    }
+
+    function openOrderModal(prodName, prodPrice, color, sizes, imgUrl, desc) {
       selectedProdForOrder = prodName;
       selectedProdPrice = prodPrice;
-      var nameEl = document.getElementById('orderProdName');
-      if (nameEl) nameEl.innerText = 'Product: ' + prodName + ' (' + prodPrice + ')';
-      var modal = document.getElementById('orderModal');
-      if (modal) modal.classList.remove('hidden');
+      
+      document.getElementById('orderModalImg').src = imgUrl;
+      document.getElementById('orderModalTitle').innerText = prodName;
+      document.getElementById('orderModalPrice').innerText = prodPrice;
+      document.getElementById('orderModalMeta').innerText = 'Color: ' + color + ' | Desc: ' + desc;
+
+      var sizeContainer = document.getElementById('orderSizeButtons');
+      sizeContainer.innerHTML = '';
+      var sizeArray = sizes.split(', ');
+      
+      sizeArray.forEach(function(sz, index) {
+        var sBtn = document.createElement('button');
+        sBtn.type = 'button';
+        sBtn.className = 'size-btn flex-1 py-2.5 rounded-xl border border-white/10 bg-black/50 text-xs font-bold text-white';
+        sBtn.innerText = sz;
+        sBtn.onclick = function() {
+          document.querySelectorAll('#orderSizeButtons .size-btn').forEach(b => b.classList.remove('active'));
+          sBtn.classList.add('active');
+          document.getElementById('custSize').value = sz;
+        };
+        if(index === 0) {
+          sBtn.classList.add('active');
+          document.getElementById('custSize').value = sz;
+        }
+        sizeContainer.appendChild(sBtn);
+      });
+
+      document.getElementById('orderModal').classList.remove('hidden');
     }
 
     function submitCustomerOrder(e) {
@@ -406,8 +371,7 @@
 
       ordersList.unshift(orderData);
       renderOrders();
-
-      alert('🎉 Thank you ' + name + '! Your order has been placed successfully.');
+      alert('🎉 Thank you ' + name + '! Your reservation has been placed successfully.');
       closeModal('orderModal');
       e.target.reset();
     }
@@ -420,32 +384,28 @@
     function renderOrders() {
       var container = document.getElementById('ordersContainer');
       var countLabel = document.getElementById('orderCount');
-      if (!container || !countLabel) return;
-
       countLabel.innerText = ordersList.length + ' Orders';
 
       if (ordersList.length === 0) {
-        container.innerHTML = '<p class="text-xs text-gray-500 text-center py-12">No orders logged yet.</p>';
+        container.innerHTML = '<p class="text-xs text-gray-500 text-center py-12">No reservations logged yet.</p>';
         return;
       }
 
       container.innerHTML = '';
       ordersList.forEach(function(ord, idx) {
         var item = document.createElement('div');
-        item.className = 'p-4 bg-white/5 border border-white/10 rounded-2xl text-xs space-y-1.5 relative';
+        item.className = 'p-4 bg-black/60 border border-white/10 rounded-2xl text-xs space-y-1.5 shadow-sm';
         item.innerHTML = 
-          '<div class="flex justify-between font-bold text-spiderAccent">' +
+          '<div class="flex justify-between font-bold text-white">' +
             '<span>#' + (ordersList.length - idx) + '. ' + ord.product + ' (' + ord.price + ')</span>' +
             '<span class="text-gray-400 text-[10px]">' + ord.time + '</span>' +
           '</div>' +
-          '<div class="text-gray-200"><b>Customer:</b> ' + ord.customerName + '</div>' +
-          '<div class="text-gray-200"><b>Phone:</b> <a href="tel:' + ord.phone + '" class="text-spiderAccent underline">' + ord.phone + '</a></div>' +
-          '<div class="text-gray-200"><b>Size:</b> ' + ord.size + '</div>' +
+          '<div class="text-gray-300"><b>Customer:</b> ' + ord.customerName + '</div>' +
+          '<div class="text-gray-300"><b>Phone:</b> <a href="tel:' + ord.phone + '" class="text-white underline">' + ord.phone + '</a></div>' +
+          '<div class="text-gray-300"><b>Size:</b> ' + ord.size + '</div>' +
           '<div class="text-gray-400"><b>Address:</b> ' + ord.address + '</div>' +
-          '<div class="flex justify-end pt-2 border-t border-white/5">' +
-            '<button type="button" onclick="removeOrder(' + ord.id + ')" class="text-red-400 hover:text-red-300 text-[11px] font-bold cursor-pointer">' +
-              '<i class="fa-solid fa-trash mr-1"></i>Delete Order' +
-            '</button>' +
+          '<div class="flex justify-end pt-2 border-t border-white/10">' +
+            '<button type="button" onclick="removeOrder(' + ord.id + ')" class="text-red-400 hover:text-red-300 text-[11px] font-bold cursor-pointer uppercase">Cancel Order</button>' +
           '</div>';
         container.appendChild(item);
       });
@@ -457,68 +417,65 @@
       var price = document.getElementById('pPrice').value;
       var color = document.getElementById('pColor').value;
       var sizes = document.getElementById('pSizes').value;
+      var desc = document.getElementById('pDesc').value;
       var fileInput = document.getElementById('pImgFile');
 
       if (!fileInput || !fileInput.files[0]) return;
+      if (!sizes) {
+        alert('⚠️ Please select at least one size.');
+        return;
+      }
 
       var file = fileInput.files[0];
       var reader = new FileReader();
       reader.onload = function(evt) {
-        var imgUrl = evt.target.result;
-
+        var imgSrc = evt.target.result;
         var card = document.createElement('div');
-        card.className = 'glass-box rounded-2xl p-4 flex flex-col justify-between spider-card relative group';
+        card.className = 'glass-luxury rounded-3xl p-4 flex flex-col justify-between store-card';
         card.innerHTML = 
           '<div>' +
-            '<div class="h-44 md:h-56 rounded-xl bg-black/50 mb-3 overflow-hidden relative border border-white/5">' +
-              '<img src="' + imgUrl + '" class="object-cover h-full w-full group-hover:scale-105 transition duration-500">' +
-              '<span class="absolute top-2.5 right-2.5 bg-spiderAccent text-black text-[10px] font-black px-2.5 py-0.5 rounded-full uppercase">New</span>' +
+            '<div class="h-60 rounded-2xl bg-black mb-4 overflow-hidden relative border border-white/10">' +
+              '<img src="' + imgSrc + '" class="object-cover h-full w-full opacity-90">' +
+              '<span class="absolute top-3 right-3 bg-white text-black text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider">New Drop</span>' +
             '</div>' +
-            '<h3 class="font-bold text-sm md:text-base text-white tracking-wide truncate">' + title + '</h3>' +
-            '<div class="flex flex-wrap gap-1.5 my-2.5">' +
-              '<span class="bg-white/5 border border-white/10 text-gray-300 text-[10px] px-2 py-0.5 rounded">Sizes: ' + sizes + '</span>' +
-              '<span class="bg-white/5 border border-white/10 text-gray-300 text-[10px] px-2 py-0.5 rounded">' + color + '</span>' +
-            '</div>' +
+            '<h3 class="font-bold text-lg text-white tracking-wide">' + title + '</h3>' +
+            '<p class="text-xs text-gray-400 mt-1">Color: <span class="text-white font-semibold">' + color + '</span> | Sizes: <span class="text-white font-semibold">' + sizes + '</span></p>' +
+            '<p class="text-xs text-gray-500 mt-2 line-clamp-2">' + desc + '</p>' +
           '</div>' +
-          '<div class="flex flex-col gap-2 mt-3 pt-3 border-t border-white/10">' +
-            '<span class="text-spiderAccent text-base md:text-lg font-black">' + price + '</span>' +
-            '<button type="button" onclick="openOrderModal(\'' + title.replace(/'/g, "\\'") + '\', \'' + price + '\')" class="spider-btn text-white w-full py-2 rounded-xl text-xs font-bold shadow-md">' +
-              'Order Now' +
-            '</button>' +
+          '<div class="flex flex-col gap-3 mt-5 pt-4 border-t border-white/10">' +
+            '<span class="text-white text-xl font-black font-mono">' + price + '</span>' +
+            '<button type="button" onclick="openOrderModal(\'' + title.replace(/'/g, "\\'") + '\', \'' + price + '\', \'' + color + '\', \'' + sizes + '\', \'' + imgSrc + '\', \'' + desc.replace(/'/g, "\\'") + '\')" class="btn-luxury w-full py-3 rounded-xl text-xs font-bold uppercase tracking-wider">Reserve Edition</button>' +
           '</div>';
         
-        var listEl = document.getElementById('product-list');
-        if (listEl) listEl.prepend(card);
-        alert('✅ New product published successfully!');
+        document.getElementById('product-list').prepend(card);
+        alert('✅ Masterpiece published successfully!');
         e.target.reset();
+        adminSelectedSizes = [];
+        document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
       };
-
       reader.readAsDataURL(file);
     }
 
-    // Advanced Pure White & Clean Gradient 3D Flowing Wave Animation Engine
+    // Full-Screen 3D Background Flowing Wave/Particles Engine (Covers Top to Bottom)
     window.addEventListener('DOMContentLoaded', function() {
-      var container = document.getElementById('canvas-container');
+      var container = document.getElementById('bg-canvas');
       if (!container) return;
       
       var scene = new THREE.Scene();
-      var camera = new THREE.PerspectiveCamera(60, container.clientWidth / container.clientHeight, 0.1, 1000);
+      var camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
       var renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
       
-      renderer.setSize(container.clientWidth, container.clientHeight);
+      renderer.setSize(window.innerWidth, window.innerHeight);
       container.appendChild(renderer.domElement);
 
-      var geometry = new THREE.PlaneGeometry(6, 3, 40, 20);
-      
+      var geometry = new THREE.PlaneGeometry(24, 16, 50, 50);
       var count = geometry.attributes.position.count;
       var colors = new Float32Array(count * 3);
-      
-      // Pure White and Soft Neon Accent Shader for Clean Look
+
       for (var i = 0; i < count; i++) {
-        var ratio = i / count;
-        colors[i * 3]     = 1.0;                  // Pure White Red
-        colors[i * 3 + 1] = 1.0 - ratio * 0.2;    // Pure White Green gradient
-        colors[i * 3 + 2] = 1.0;                  // Pure White Blue
+        colors[i * 3]     = 0.2;
+        colors[i * 3 + 1] = 0.2;
+        colors[i * 3 + 2] = 0.35;
       }
       geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
@@ -526,15 +483,14 @@
         vertexColors: true,
         wireframe: true,
         transparent: true,
-        opacity: 0.8
+        opacity: 0.22
       });
       
-      var waveMesh = new THREE.Mesh(geometry, material);
-      scene.add(waveMesh);
+      var mesh = new THREE.Mesh(geometry, material);
+      scene.add(mesh);
 
-      camera.position.z = 3.8;
-      camera.position.y = -0.3;
-      waveMesh.rotation.x = -0.3;
+      camera.position.z = 5.5;
+      mesh.rotation.x = -0.35;
 
       var clock = new THREE.Clock();
 
@@ -546,23 +502,22 @@
         for (var i = 0; i < position.count; i++) {
           var u = position.getX(i);
           var v = position.getY(i);
-          var z = Math.sin(u * 0.8 + time * 2.0) * 0.4 + Math.cos(v * 0.8 + time * 1.5) * 0.4;
+          var z = Math.sin(u * 1.0 + time * 1.2) * 0.45 + Math.cos(v * 1.0 + time * 1.0) * 0.45;
           position.setZ(i, z);
         }
         geometry.attributes.position.needsUpdate = true;
         
-        waveMesh.rotation.z = time * 0.05;
+        mesh.rotation.z = Math.sin(time * 0.1) * 0.1;
         renderer.render(scene, camera);
       }
       animate();
 
       window.addEventListener('resize', function() {
-        if (!container) return;
-        camera.aspect = container.clientWidth / container.clientHeight;
+        camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
-        renderer.setSize(container.clientWidth, container.clientHeight);
+        renderer.setSize(window.innerWidth, window.innerHeight);
       });
     });
   </script>
 </body>
-    </html>
+</html>
