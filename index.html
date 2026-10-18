@@ -73,7 +73,7 @@
 
     #canvas-container {
       width: 100%;
-      height: 380px;
+      height: 400px;
       position: relative;
     }
   </style>
@@ -97,7 +97,7 @@
     </div>
   </header>
 
-  <!-- Hero Section with Multi-Color Video Style 3D Wave & Floating Cards -->
+  <!-- Hero Section with Advanced 3D Wave & Floating Cards -->
   <section class="pt-36 pb-20 px-6 max-w-7xl mx-auto">
     <div class="flex flex-col lg:flex-row items-center justify-between gap-12">
       
@@ -122,7 +122,7 @@
         </div>
       </div>
 
-      <!-- Multi-Color 3D Wave Container -->
+      <!-- Advanced 3D Wave Container with Pure White & Clean Gradient -->
       <div class="lg:w-1/2 w-full relative">
         <div class="glass-box rounded-3xl p-3 relative overflow-hidden shadow-2xl border border-white/10">
           <div id="canvas-container" class="rounded-2xl overflow-hidden flex items-center justify-center"></div>
@@ -496,7 +496,7 @@
       reader.readAsDataURL(file);
     }
 
-    // Advanced Multi-Color Rainbow 3D Wave Animation Engine
+    // Advanced Pure White & Clean Gradient 3D Flowing Wave Animation Engine
     window.addEventListener('DOMContentLoaded', function() {
       var container = document.getElementById('canvas-container');
       if (!container) return;
@@ -508,16 +508,17 @@
       renderer.setSize(container.clientWidth, container.clientHeight);
       container.appendChild(renderer.domElement);
 
-      var geometry = new THREE.PlaneGeometry(6, 3, 35, 18);
+      var geometry = new THREE.PlaneGeometry(6, 3, 40, 20);
       
       var count = geometry.attributes.position.count;
       var colors = new Float32Array(count * 3);
       
+      // Pure White and Soft Neon Accent Shader for Clean Look
       for (var i = 0; i < count; i++) {
         var ratio = i / count;
-        colors[i * 3]     = 0.0 + ratio * 0.5;
-        colors[i * 3 + 1] = 1.0 - ratio * 0.3;
-        colors[i * 3 + 2] = 0.8 + ratio * 0.2;
+        colors[i * 3]     = 1.0;                  // Pure White Red
+        colors[i * 3 + 1] = 1.0 - ratio * 0.2;    // Pure White Green gradient
+        colors[i * 3 + 2] = 1.0;                  // Pure White Blue
       }
       geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
@@ -525,15 +526,15 @@
         vertexColors: true,
         wireframe: true,
         transparent: true,
-        opacity: 0.65
+        opacity: 0.8
       });
       
       var waveMesh = new THREE.Mesh(geometry, material);
       scene.add(waveMesh);
 
-      camera.position.z = 4;
-      camera.position.y = -0.4;
-      waveMesh.rotation.x = -0.35;
+      camera.position.z = 3.8;
+      camera.position.y = -0.3;
+      waveMesh.rotation.x = -0.3;
 
       var clock = new THREE.Clock();
 
@@ -545,12 +546,12 @@
         for (var i = 0; i < position.count; i++) {
           var u = position.getX(i);
           var v = position.getY(i);
-          var z = Math.sin(u + time * 1.5) * 0.35 + Math.cos(v + time * 1.2) * 0.35;
+          var z = Math.sin(u * 0.8 + time * 2.0) * 0.4 + Math.cos(v * 0.8 + time * 1.5) * 0.4;
           position.setZ(i, z);
         }
         geometry.attributes.position.needsUpdate = true;
         
-        waveMesh.rotation.z = time * 0.08;
+        waveMesh.rotation.z = time * 0.05;
         renderer.render(scene, camera);
       }
       animate();
@@ -564,4 +565,4 @@
     });
   </script>
 </body>
-</html>
+    </html>
