@@ -97,7 +97,7 @@
     </div>
   </header>
 
-  <!-- Hero Section with 3D Wave & Floating Cards -->
+  <!-- Hero Section with Multi-Color Video Style 3D Wave & Floating Cards -->
   <section class="pt-36 pb-20 px-6 max-w-7xl mx-auto">
     <div class="flex flex-col lg:flex-row items-center justify-between gap-12">
       
@@ -122,7 +122,7 @@
         </div>
       </div>
 
-      <!-- 3D Wave Container -->
+      <!-- Multi-Color 3D Wave Container -->
       <div class="lg:w-1/2 w-full relative">
         <div class="glass-box rounded-3xl p-3 relative overflow-hidden shadow-2xl border border-white/10">
           <div id="canvas-container" class="rounded-2xl overflow-hidden flex items-center justify-center"></div>
@@ -245,7 +245,7 @@
     </div>
   </div>
 
-  <!-- Admin Login Modal (Secure & Blank Password Field) -->
+  <!-- Admin Login Modal -->
   <div id="loginModal" class="fixed inset-0 bg-black/85 backdrop-blur-xl hidden z-50 flex items-center justify-center p-4">
     <div class="glass-box p-6 md:p-8 rounded-3xl w-full max-w-md relative shadow-2xl border border-white/10">
       <button type="button" onclick="closeModal('loginModal')" class="absolute top-5 right-5 text-gray-400 text-2xl hover:text-white">&times;</button>
@@ -496,7 +496,7 @@
       reader.readAsDataURL(file);
     }
 
-    // Three.js 3D Wave Animation Engine
+    // Advanced Multi-Color Rainbow 3D Wave Animation Engine
     window.addEventListener('DOMContentLoaded', function() {
       var container = document.getElementById('canvas-container');
       if (!container) return;
@@ -508,19 +508,32 @@
       renderer.setSize(container.clientWidth, container.clientHeight);
       container.appendChild(renderer.domElement);
 
-      var geometry = new THREE.PlaneGeometry(6, 3, 30, 15);
+      var geometry = new THREE.PlaneGeometry(6, 3, 35, 18);
+      
+      var count = geometry.attributes.position.count;
+      var colors = new Float32Array(count * 3);
+      
+      for (var i = 0; i < count; i++) {
+        var ratio = i / count;
+        colors[i * 3]     = 0.0 + ratio * 0.5;
+        colors[i * 3 + 1] = 1.0 - ratio * 0.3;
+        colors[i * 3 + 2] = 0.8 + ratio * 0.2;
+      }
+      geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
       var material = new THREE.MeshBasicMaterial({ 
-        color: 0x00FFA3, 
+        vertexColors: true,
         wireframe: true,
         transparent: true,
-        opacity: 0.35
+        opacity: 0.65
       });
+      
       var waveMesh = new THREE.Mesh(geometry, material);
       scene.add(waveMesh);
 
       camera.position.z = 4;
-      camera.position.y = -0.5;
-      waveMesh.rotation.x = -0.4;
+      camera.position.y = -0.4;
+      waveMesh.rotation.x = -0.35;
 
       var clock = new THREE.Clock();
 
@@ -532,12 +545,12 @@
         for (var i = 0; i < position.count; i++) {
           var u = position.getX(i);
           var v = position.getY(i);
-          var z = Math.sin(u + time * 1.5) * 0.3 + Math.cos(v + time * 1.2) * 0.3;
+          var z = Math.sin(u + time * 1.5) * 0.35 + Math.cos(v + time * 1.2) * 0.35;
           position.setZ(i, z);
         }
         geometry.attributes.position.needsUpdate = true;
         
-        waveMesh.rotation.z = time * 0.1;
+        waveMesh.rotation.z = time * 0.08;
         renderer.render(scene, camera);
       }
       animate();
@@ -551,4 +564,4 @@
     });
   </script>
 </body>
-  </html>
+</html>
